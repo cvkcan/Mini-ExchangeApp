@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/redirectFragment">
+    <fragment
+        android:id="@+id/redirectFragment"
+        android:name="com.cvkcan.exchangeapp.RedirectFragment"
+        android:label="fragment_redirect"
+        tools:layout="@layout/fragment_redirect" >
+        <action
+            android:id="@+id/action_redirectFragment_to_euroFragment"
+            app:destination="@id/euroFragment" />
+        <action
+            android:id="@+id/action_redirectFragment_to_goldFragment"
+            app:destination="@id/goldFragment" />
+        <action
+            android:id="@+id/action_redirectFragment_to_usdFragment"
+            app:destination="@id/usdFragment" />
+        <action
+            android:id="@+id/action_redirectFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/euroFragment"
+        android:name="com.cvkcan.exchangeapp.EuroFragment"
+        android:label="fragment_euro"
+        tools:layout="@layout/fragment_euro" >
+        <action
+            android:id="@+id/action_euroFragment_to_redirectFragment"
+            app:destination="@id/redirectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goldFragment"
+        android:name="com.cvkcan.exchangeapp.GoldFragment"
+        android:label="fragment_gold"
+        tools:layout="@layout/fragment_gold" >
+        <action
+            android:id="@+id/action_goldFragment_to_redirectFragment"
+            app:destination="@id/redirectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/usdFragment"
+        android:name="com.cvkcan.exchangeapp.UsdFragment"
+        android:label="fragment_usd"
+        tools:layout="@layout/fragment_usd" >
+        <action
+            android:id="@+id/action_usdFragment_to_redirectFragment"
+            app:destination="@id/redirectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cvkcan.exchangeapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_redirectFragment"
+            app:destination="@id/redirectFragment" />
+    </fragment>
+</navigation>
