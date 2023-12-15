@@ -26,6 +26,16 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
 
         loadData()
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
+        view.findViewById<RecyclerView>(R.id.euroRecyclerView)?.layoutManager = layoutManager
+
+        getCurrencyRecyclerViewAdapter?.let {
+            view.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter = it
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,23 +54,23 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
         val service = retrofit.create(CurrencyAPI::class.java)
         val callData = service.getData()
 
-        callData.enqueue(object : Callback<List<ApiResponse>> {
-            override fun onResponse(
-                call: Call<List<ApiResponse>>,
-                response: Response<List<ApiResponse>>
-            ) {
+        callData.enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
-                    val apiResponseList = response.body()
-                    apiResponseList?.let {
-                        if (it.isNotEmpty()) {
-                            currencyModels = it[0] // İlk öğeyi al
-                            getCurrencyRecyclerViewAdapter = GetCurrencyRecyclerViewAdapter(it, this@EuroFragment)
-                        }
+                    val apiResponse = response.body()
+                    apiResponse?.let {
+                        currencyModels = it
+                        getCurrencyRecyclerViewAdapter =
+                            GetCurrencyRecyclerViewAdapter(listOf(it), this@EuroFragment)
+
+                        // Set the adapter here after it's initialized
+                        view?.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter =
+                            getCurrencyRecyclerViewAdapter
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<ApiResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                 t.printStackTrace()
             }
         })

@@ -17,28 +17,27 @@ class GetCurrencyRecyclerViewAdapter(
     interface Listener{
         fun onItemClick(apiResponse: ApiResponse)
     }
-    class CurrencyVH (view : View) : RecyclerView.ViewHolder(view) {
+    class CurrencyVH(view: View) : RecyclerView.ViewHolder(view) {
         @SuppressLint("ResourceType")
-        fun bind(currencies : ApiResponse, listener : Listener) {
-            val bColor = itemView.findViewById<LinearLayout>(R.layout.recycler_getcurrency)
+        fun bind(currencies: ApiResponse, listener: Listener) {
+            val bColor = itemView.findViewById<LinearLayout>(R.id.dumendenDeneme)
             if (currencies.usd.exchangeRatioDirection == "caret-up") {
                 bColor.setBackgroundColor(Color.BLUE)
-            }
-            else if (currencies.usd.exchangeRatioDirection == "caret-down"){
+            } else if (currencies.usd.exchangeRatioDirection == "caret-down") {
                 bColor.setBackgroundColor(Color.RED)
-            }
-            else
-                bColor.setVerticalGravity(Color.YELLOW)
+            } else
+                bColor.setBackgroundColor(Color.YELLOW)
+
             itemView.setOnClickListener {
                 listener.onItemClick(currencies)
             }
-            itemView.findViewById<TextView>(R.id.currencyType).text = "USD"
+            itemView.findViewById<TextView>(R.id.currencyType).text = "EUR"
             itemView.findViewById<TextView>(R.id.currencyBuyingPrice).text =
-                currencies.usd.forexBuying
+                currencies.euro.forexBuying
             itemView.findViewById<TextView>(R.id.currencySellingPrice).text =
-                currencies.usd.forexSelling
+                currencies.euro.forexSelling
             itemView.findViewById<TextView>(R.id.currencyVariant).text =
-                currencies.usd.variation
+                currencies.euro.variation
         }
     }
 
