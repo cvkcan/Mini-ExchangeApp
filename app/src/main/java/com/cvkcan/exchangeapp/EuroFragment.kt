@@ -23,15 +23,12 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
         super.onCreate(savedInstanceState)
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this.context)
         view?.findViewById<RecyclerView>(R.id.euroRecyclerView)?.layoutManager = layoutManager
-
         loadData()
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
         view.findViewById<RecyclerView>(R.id.euroRecyclerView)?.layoutManager = layoutManager
-
         getCurrencyRecyclerViewAdapter?.let {
             view.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter = it
         }
@@ -61,7 +58,7 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
                     apiResponse?.let {
                         currencyModels = it
                         getCurrencyRecyclerViewAdapter =
-                            GetCurrencyRecyclerViewAdapter(listOf(it), this@EuroFragment)
+                            GetCurrencyRecyclerViewAdapter(listOf(it), this@EuroFragment,"EUR")
 
                         // Set the adapter here after it's initialized
                         view?.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter =
