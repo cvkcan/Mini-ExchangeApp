@@ -56,7 +56,8 @@ class GoldFragment : Fragment() , GetCurrencyRecyclerViewAdapter.Listener {
                     apiResponse?.let {
                         currencyModels = it
                         getCurrencyRecyclerViewAdapter =
-                            GetCurrencyRecyclerViewAdapter(listOf(it), this@GoldFragment,"GOLD")
+                            GetCurrencyRecyclerViewAdapter(listOf(it),
+                                this@GoldFragment,"GOLD")
                         view?.findViewById<RecyclerView>(R.id.goldRecyclerView)?.adapter =
                             getCurrencyRecyclerViewAdapter
                     }
@@ -70,7 +71,7 @@ class GoldFragment : Fragment() , GetCurrencyRecyclerViewAdapter.Listener {
     }
 
     override fun onItemClick(apiResponse: ApiResponse) {
-        TODO("Not yet implemented")
+        //
     }
 
 }

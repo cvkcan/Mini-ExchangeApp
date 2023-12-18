@@ -48,7 +48,6 @@ class UsdFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
 
         val service = retrofit.create(CurrencyAPI::class.java)
         val callData = service.getData()
-
         callData.enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
@@ -56,7 +55,8 @@ class UsdFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
                     apiResponse?.let {
                         currencyModels = it
                         getCurrencyRecyclerViewAdapter =
-                            GetCurrencyRecyclerViewAdapter(listOf(it), this@UsdFragment,"USD")
+                            GetCurrencyRecyclerViewAdapter(listOf(it),
+                                this@UsdFragment,"USD")
 
                         // Set the adapter here after it's initialized
                         view?.findViewById<RecyclerView>(R.id.usdRecyclerView)?.adapter =
@@ -72,7 +72,7 @@ class UsdFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
     }
 
     override fun onItemClick(apiResponse: ApiResponse) {
-        TODO("Not yet implemented")
+        //
     }
 
 }

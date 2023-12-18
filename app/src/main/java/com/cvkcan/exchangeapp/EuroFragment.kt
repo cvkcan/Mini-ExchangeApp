@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,7 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
     private val BASE_URL: String = "https://api.genelpara.com/"
     private var currencyModels: ApiResponse? = null
     private var getCurrencyRecyclerViewAdapter : GetCurrencyRecyclerViewAdapter? = null
-
+    val db by lazy { DBHelper(this.requireContext())  }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val layoutManager : RecyclerView.LayoutManager = LinearLayoutManager(this.context)
@@ -32,6 +33,15 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
         getCurrencyRecyclerViewAdapter?.let {
             view.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter = it
         }
+        val buyCurrencyButton = view.findViewById<Button>(R.id.buyCurrency)
+        buyCurrencyButton.setOnClickListener {
+            var basketModel = BasketModel(15, "EUR", 24)
+            db.insertBasket(basketModel)
+        }
+//        ?.setOnClickListener {
+//            var basketModel = BasketModel(15, "EUR", 24)
+//            db.insertBasket(basketModel)
+//        }
     }
 
     override fun onCreateView(
@@ -58,7 +68,8 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
                     apiResponse?.let {
                         currencyModels = it
                         getCurrencyRecyclerViewAdapter =
-                            GetCurrencyRecyclerViewAdapter(listOf(it), this@EuroFragment,"EUR")
+                            GetCurrencyRecyclerViewAdapter(listOf(it),
+                                this@EuroFragment,"EUR")
 
                         // Set the adapter here after it's initialized
                         view?.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter =
@@ -74,6 +85,6 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
     }
 
     override fun onItemClick(apiResponse: ApiResponse) {
-        TODO("Not yet implemented")
+        //
     }
 }

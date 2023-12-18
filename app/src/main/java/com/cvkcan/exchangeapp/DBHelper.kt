@@ -95,14 +95,9 @@ class DBHelper
                 println("OLDU GALIBA")
             }while (result.moveToNext())
         }
-        result.close()
-        sqliteDB.close()
+        //result.close()
+        //sqliteDB.close()
+        println(userList)
         return userList
     }
 }
-
-
-//private val TABLE_NAME2 = "Basket"
-//private val TABLE_USED_ID2 = "Id"
-//private val COL_CURRENCIE_TYPES = "CurrencieTypes"
-//private val COL_PER_QUANTITY = "PerQuantity"

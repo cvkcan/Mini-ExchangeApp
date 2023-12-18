@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 
 
 class RedirectFragment : Fragment() {
-
+//    val db by lazy { DBHelper(this.requireContext())  }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

@@ -69,6 +69,7 @@
             android:inputType="number"
             android:textAlignment="center"
             />
+
         <Button
             android:id="@+id/buyCurrency"
             android:layout_width="0dp"
