@@ -12,6 +12,8 @@ import io.reactivex.rxjava3.core.Flowable
 interface BasketDao {
     @Query("SELECT * FROM basket")
     fun getAllBaskets() : List<Basket>
+    @Query("SELECT * FROM basket WHERE id = :id")
+    fun getBasketById(id : Int) : Basket
     @Query("DELETE FROM basket WHERE id = :basketId")
     fun deleteBasketById(basketId: Int)
     @Insert

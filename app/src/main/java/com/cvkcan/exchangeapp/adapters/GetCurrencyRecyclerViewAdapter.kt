@@ -8,8 +8,11 @@ import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.cvkcan.exchangeapp.R
 import com.cvkcan.exchangeapp.apis.ApiResponse
 import com.cvkcan.exchangeapp.databinding.RecyclerGetcurrencyBinding
 import com.cvkcan.exchangeapp.model.Basket
@@ -79,11 +82,23 @@ class GetCurrencyRecyclerViewAdapter(
             }
 
             binding.buyCurrency.setOnClickListener {
-                println("SIDGHSDKJDLLD")
-//                insertBasket()
-
-//                insertBasket()
-
+                when (type) {
+                    "USD" -> {
+//                        insertBasket("USD")
+//                        deleteBasket("USD")
+                        updateBasket("USD")
+                    }
+                    "EUR" -> {
+//                        insertBasket("EUR")
+//                        deleteBasket("EUR")
+                        updateBasket("EUR")
+                    }
+                    "GOLD" -> {
+//                        insertBasket("GOLD")
+//                        deleteBasket("GOLD")
+                        updateBasket("GOLD")
+                    }
+                }
 
 //                GlobalScope.launch {
 //                    val users = getUser()
@@ -95,41 +110,62 @@ class GetCurrencyRecyclerViewAdapter(
 
         //region DB Area
 
-        fun insertBasket() {
+        fun insertBasket(type : String) {
             GlobalScope.launch(Dispatchers.IO) {
                 val basketDao: BasketDao = GeneralDatabase.getInstance(binding.root.context)
                     .basketDao()
                 val basket = Basket(
-                    44,
-                    "EUR",
-                    444
+                    when (type){
+                        "USD" ->{
+                            11
+                        }
+                        "EUR" ->{
+                            22
+                        }
+
+                        else -> {33}
+                    },
+                    type,
+                    itemView.findViewById<EditText>(R.id.quantityText).text.toString().toInt()
                 )
+                println(type)
                 basketDao.insertBasket(basket)
             }
         }
-        fun updateBasket(){
+        fun updateBasket(type : String){
+            var id = 0
+            when (type){
+                "USD" ->{
+                    id = 11
+                }
+                "EUR" ->{
+                    id = 22
+                }
+                "GOLD" -> {id = 33}
+            }
             GlobalScope.launch(Dispatchers.IO){
                 val basketDao : BasketDao = GeneralDatabase.getInstance(binding.root.context)
                     .basketDao()
+                var getQuantity = basketDao.getBasketById(id)
                 val basket = Basket(
-                    44,
-                    "EUR",
-                    111
+                    id,
+                    type,
+                    itemView.findViewById<EditText>(R.id.quantityText).text
+                        .toString().toInt() + getQuantity.PerQuantity.toString().toInt()
                 )
                 basketDao.updateBasket(basket)
-                val allBasket : List<Basket> = basketDao.getAllBaskets()
-                println(allBasket.get(0).PerQuantity)
+
             }
+            Toast.makeText(binding.root.context, "The Purchase was succesfull!"
+                , Toast.LENGTH_LONG).show()
         }
-        fun deleteBasket(){
+        fun deleteBasket(type : String){
             GlobalScope.launch(Dispatchers.IO){
                 val basketDao : BasketDao = GeneralDatabase.getInstance(binding.root.context)
                     .basketDao()
-                val basketId : Int = 44
+                val basketId : Int = 11
                 basketDao.deleteBasketById(basketId)
                 val allBasket : List<Basket> = basketDao.getAllBaskets()
-                println(allBasket.get(0).PerQuantity)
-
             }
         }
         suspend fun getBasket() : List<Basket> {
@@ -146,14 +182,13 @@ class GetCurrencyRecyclerViewAdapter(
             GlobalScope.launch(Dispatchers.IO){
                 val userDao : UserInformationDao = GeneralDatabase.getInstance(binding.root.context)
                     .userInformationDao()
-                val user = UserInformation(3131,
+                val user = UserInformation(22,
                     25000,
                     10,
                     250,
                     500)
                 userDao.insertUserInformation(user)
                 val allUser : List<UserInformation> = userDao.getAllUserInformation()
-                println(allUser.get(0).Balance)
             }
         }
         fun deleteUser(){
@@ -189,9 +224,8 @@ class GetCurrencyRecyclerViewAdapter(
             }
         }
 
+
         //endregion
-
-
         private fun redirectUrl() {
             val msg = AlertDialog.Builder(itemView.context)
             msg.setTitle("Routing Screen")

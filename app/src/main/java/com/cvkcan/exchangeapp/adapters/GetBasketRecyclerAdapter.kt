@@ -25,6 +25,7 @@ class GetBasketRecyclerAdapter(val getBasketDatas : ArrayList<Basket>)
 
     override fun onBindViewHolder(holder: MyBasketVH, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.getBasketText).text =
-            getBasketDatas.get(position).toString()
+            getBasketDatas.get(position).CurrencieTypes+ "\n" +
+                    getBasketDatas.get(position).PerQuantity
     }
 }
