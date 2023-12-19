@@ -1,4 +1,4 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.apis
 
 import retrofit2.Call
 import retrofit2.http.GET

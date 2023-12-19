@@ -1,4 +1,4 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.apis
 
 import com.google.gson.annotations.SerializedName
 

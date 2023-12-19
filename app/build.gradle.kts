@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -62,4 +63,17 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
     implementation ("com.diogobernardino:williamchart:3.10.1")
+
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
+
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.1") // RxJava versiyonunu belirtin (örneğin, 3.1.1)
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0") // RxAndroid versiyonunu belirtin (örneğin, 3.0.0)
+
 }

@@ -6,7 +6,7 @@
     app:startDestination="@id/redirectFragment">
     <fragment
         android:id="@+id/redirectFragment"
-        android:name="com.cvkcan.exchangeapp.RedirectFragment"
+        android:name="com.cvkcan.exchangeapp.fragments.RedirectFragment"
         android:label="fragment_redirect"
         tools:layout="@layout/fragment_redirect" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/euroFragment"
-        android:name="com.cvkcan.exchangeapp.EuroFragment"
+        android:name="com.cvkcan.exchangeapp.fragments.EuroFragment"
         android:label="fragment_euro"
         tools:layout="@layout/fragment_euro" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/goldFragment"
-        android:name="com.cvkcan.exchangeapp.GoldFragment"
+        android:name="com.cvkcan.exchangeapp.fragments.GoldFragment"
         android:label="fragment_gold"
         tools:layout="@layout/fragment_gold" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/usdFragment"
-        android:name="com.cvkcan.exchangeapp.UsdFragment"
+        android:name="com.cvkcan.exchangeapp.fragments.UsdFragment"
         android:label="fragment_usd"
         tools:layout="@layout/fragment_usd" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.cvkcan.exchangeapp.ProfileFragment"
+        android:name="com.cvkcan.exchangeapp.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

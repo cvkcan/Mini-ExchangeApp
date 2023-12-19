@@ -1,10 +1,11 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.cvkcan.exchangeapp.R
 
 class GiveAdviceRecyclerAdapter(val getAdvice : ArrayList<String>)
     : RecyclerView.Adapter<GiveAdviceRecyclerAdapter.GiveAdviceVH>() {

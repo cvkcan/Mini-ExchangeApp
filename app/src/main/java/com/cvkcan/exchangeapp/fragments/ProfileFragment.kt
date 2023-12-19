@@ -1,4 +1,4 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.cvkcan.exchangeapp.adapters.GetBasketRecyclerAdapter
+import com.cvkcan.exchangeapp.adapters.GiveAdviceRecyclerAdapter
+import com.cvkcan.exchangeapp.R
 
 class ProfileFragment : Fragment() {
 

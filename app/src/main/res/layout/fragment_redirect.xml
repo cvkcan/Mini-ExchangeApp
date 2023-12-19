@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RedirectFragment">
+    tools:context=".fragments.RedirectFragment">
 
     <Button
         android:id="@+id/goldButton"

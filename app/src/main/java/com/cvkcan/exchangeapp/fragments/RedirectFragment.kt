@@ -1,7 +1,5 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.fragments
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
+import com.cvkcan.exchangeapp.R
+import com.cvkcan.exchangeapp.databinding.RecyclerGetcurrencyBinding
 
 
 class RedirectFragment : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +48,6 @@ class RedirectFragment : Fragment() {
         buttonProfile.setOnClickListener {
             findNavController().navigate(R.id.action_redirectFragment_to_profileFragment)
         }
+
     }
 }
