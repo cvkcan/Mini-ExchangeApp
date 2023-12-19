@@ -1,4 +1,4 @@
-package com.cvkcan.exchangeapp.fragments
+package com.cvkcan.exchangeapp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cvkcan.exchangeapp.apis.ApiResponse
-import com.cvkcan.exchangeapp.apis.CurrencyAPI
-import com.cvkcan.exchangeapp.adapters.GetCurrencyRecyclerViewAdapter
-import com.cvkcan.exchangeapp.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,7 +56,8 @@ class GoldFragment : Fragment() , GetCurrencyRecyclerViewAdapter.Listener {
                     apiResponse?.let {
                         currencyModels = it
                         getCurrencyRecyclerViewAdapter =
-                            GetCurrencyRecyclerViewAdapter(requireContext(),listOf(it), this@GoldFragment,"GOLD")
+                            GetCurrencyRecyclerViewAdapter(listOf(it),
+                                this@GoldFragment,"GOLD")
                         view?.findViewById<RecyclerView>(R.id.goldRecyclerView)?.adapter =
                             getCurrencyRecyclerViewAdapter
                     }

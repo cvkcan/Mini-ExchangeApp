@@ -1,8 +1,8 @@
 package com.cvkcan.exchangeapp
 
-data class UserInformationModel (val Id:  Int,
-                                 val Balance : Int,
-                                 val GoldQuantity : Int,
-                                 val EurQuantity: Int,
-                                 val UsdQuantity: Int
+data class UserInformationModel (var Id:  Int,
+                                 var Balance : Int,
+                                 var GoldQuantity : Int,
+                                 var EurQuantity: Int,
+                                 var UsdQuantity: Int
 )
