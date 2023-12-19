@@ -11,6 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cvkcan.exchangeapp.adapters.GetBasketRecyclerAdapter
 import com.cvkcan.exchangeapp.adapters.GiveAdviceRecyclerAdapter
 import com.cvkcan.exchangeapp.R
+import com.cvkcan.exchangeapp.model.Basket
+import com.cvkcan.exchangeapp.roomdb.BasketDao
+import com.cvkcan.exchangeapp.roomdb.GeneralDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment() {
 
@@ -41,14 +48,30 @@ class ProfileFragment : Fragment() {
             val adapter = GiveAdviceRecyclerAdapter(totalValue)
             recyclerView.adapter = adapter
         }
-        val aboutMyBasket = ArrayList<String>()
-        aboutMyBasket.add("Boş veri yollanacak.")
-        val layout = LinearLayoutManager(this.context)
-        val recyclerView: RecyclerView = requireView().findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = layout
-        val adapter = GetBasketRecyclerAdapter(aboutMyBasket)
-        recyclerView.adapter = adapter
 
+        val aboutMyBasket = ArrayList<Basket>()
+
+        // Launch a coroutine to get the basket data
+        GlobalScope.launch(Dispatchers.Main) {
+            aboutMyBasket.addAll(getBasket())
+
+            // Now you can use aboutMyBasket for further operations
+            val layout = LinearLayoutManager(this@ProfileFragment.context)
+            val recyclerView: RecyclerView = requireView().findViewById(R.id.recyclerView)
+            recyclerView.layoutManager = layout
+            val adapter = GetBasketRecyclerAdapter(aboutMyBasket)
+            recyclerView.adapter = adapter
+        }
+    }
+
+    suspend fun getBasket(): List<Basket> {
+        return withContext(Dispatchers.IO) {
+            val basketDao: BasketDao = GeneralDatabase
+                .getInstance(requireContext())
+                .basketDao()
+
+            return@withContext basketDao.getAllBaskets()
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cvkcan.exchangeapp.R
+import com.cvkcan.exchangeapp.adapters.GetCurrencyRecyclerViewAdapter
+import com.cvkcan.exchangeapp.apis.ApiResponse
+import com.cvkcan.exchangeapp.apis.CurrencyAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

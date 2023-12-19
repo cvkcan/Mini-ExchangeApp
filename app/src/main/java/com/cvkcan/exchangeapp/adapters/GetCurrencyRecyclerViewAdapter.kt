@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
-import android.provider.Settings.Global
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
@@ -24,7 +23,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GetCurrencyRecyclerViewAdapter(
-    private val context : Context,
     private val currencyTypes: List<ApiResponse>,
     private val listener: Listener,
     private val type: String,
@@ -84,6 +82,8 @@ class GetCurrencyRecyclerViewAdapter(
                 println("SIDGHSDKJDLLD")
 //                insertBasket()
 
+//                insertBasket()
+
 
 //                GlobalScope.launch {
 //                    val users = getUser()
@@ -132,14 +132,16 @@ class GetCurrencyRecyclerViewAdapter(
 
             }
         }
-        fun getBasket() {
-            GlobalScope.launch(Dispatchers.IO){
+        suspend fun getBasket() : List<Basket> {
+            return withContext(Dispatchers.IO){
                 val basketDao : BasketDao = GeneralDatabase
                     .getInstance(binding.root.context)
                     .basketDao()
-                basketDao.getAllBaskets()
+
+                return@withContext basketDao.getAllBaskets()
             }
         }
+
         fun insertUser(){
             GlobalScope.launch(Dispatchers.IO){
                 val userDao : UserInformationDao = GeneralDatabase.getInstance(binding.root.context)
@@ -186,6 +188,7 @@ class GetCurrencyRecyclerViewAdapter(
                 return@withContext userDao.getAllUserInformation()
             }
         }
+
         //endregion
 
 

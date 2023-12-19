@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cvkcan.exchangeapp.R
+import com.cvkcan.exchangeapp.model.Basket
 
-class GetBasketRecyclerAdapter(val getBasketDatas : ArrayList<String>)
+class GetBasketRecyclerAdapter(val getBasketDatas : ArrayList<Basket>)
     : RecyclerView.Adapter<GetBasketRecyclerAdapter.MyBasketVH>(){
     class MyBasketVH(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,6 +25,6 @@ class GetBasketRecyclerAdapter(val getBasketDatas : ArrayList<String>)
 
     override fun onBindViewHolder(holder: MyBasketVH, position: Int) {
         holder.itemView.findViewById<TextView>(R.id.getBasketText).text =
-            getBasketDatas.get(position)
+            getBasketDatas.get(position).toString()
     }
 }

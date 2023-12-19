@@ -1,13 +1,16 @@
-package com.cvkcan.exchangeapp
+package com.cvkcan.exchangeapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cvkcan.exchangeapp.R
+import com.cvkcan.exchangeapp.adapters.GetCurrencyRecyclerViewAdapter
+import com.cvkcan.exchangeapp.apis.ApiResponse
+import com.cvkcan.exchangeapp.apis.CurrencyAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,7 +61,8 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
                     apiResponse?.let {
                         currencyModels = it
                         getCurrencyRecyclerViewAdapter =
-                            GetCurrencyRecyclerViewAdapter(listOf(it), this@EuroFragment,"EUR")
+                            GetCurrencyRecyclerViewAdapter(listOf(it),
+                                this@EuroFragment,"EUR")
 
                         // Set the adapter here after it's initialized
                         view?.findViewById<RecyclerView>(R.id.euroRecyclerView)?.adapter =
@@ -74,6 +78,6 @@ class EuroFragment : Fragment(), GetCurrencyRecyclerViewAdapter.Listener {
     }
 
     override fun onItemClick(apiResponse: ApiResponse) {
-        TODO("Not yet implemented")
+        //
     }
 }
