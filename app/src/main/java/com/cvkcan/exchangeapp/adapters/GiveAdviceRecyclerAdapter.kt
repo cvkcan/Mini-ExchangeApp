@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.text.trimmedLength
 import androidx.recyclerview.widget.RecyclerView
 import com.cvkcan.exchangeapp.R
 
@@ -20,10 +21,10 @@ class GiveAdviceRecyclerAdapter(val getAdvice : ArrayList<String>)
     }
 
     override fun getItemCount(): Int {
-        return getAdvice.size
+        return getAdvice.count()
     }
 
     override fun onBindViewHolder(holder: GiveAdviceVH, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.setAdviceText).text = getAdvice.get(position)
+        holder.itemView.findViewById<TextView>(R.id.setAdviceText).text = getAdvice[0]
     }
 }

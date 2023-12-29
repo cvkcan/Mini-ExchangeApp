@@ -41,14 +41,16 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val giveAdvice = view.findViewById<Button>(R.id.giveAdvice)
+        var totalValue = ArrayList<String>()
         giveAdvice.setOnClickListener {
-            val totalValue = ArrayList<String>()
-            totalValue.add("Advice")
-            val layout = LinearLayoutManager(this.context)
-            val recyclerView: RecyclerView = requireView().findViewById(R.id.recyclerView2)
-            recyclerView.layoutManager = layout
-            val adapter = GiveAdviceRecyclerAdapter(totalValue)
-            recyclerView.adapter = adapter
+            GlobalScope.launch(Dispatchers.Main){
+                totalValue.add(setAdvice())
+                val layout = LinearLayoutManager(this@ProfileFragment.context)
+                val recyclerView: RecyclerView = requireView().findViewById(R.id.recyclerView2)
+                recyclerView.layoutManager = layout
+                val adapter = GiveAdviceRecyclerAdapter(totalValue)
+                recyclerView.adapter = adapter
+            }
         }
         updateBalanceText()
         val aboutMyBasket = ArrayList<Basket>()
@@ -64,7 +66,6 @@ class ProfileFragment : Fragment() {
             updateUser()
         }
     }
-
     suspend fun getBasket(): List<Basket> {
         return withContext(Dispatchers.IO) {
             val basketDao: BasketDao = GeneralDatabase
@@ -115,6 +116,25 @@ class ProfileFragment : Fragment() {
             view?.findViewById<TextView>(R.id.showBalanceText)?.text =
                 "Balance : " + balance.toString()
         }
+    }
+    suspend fun setAdvice() : String {
+        var balanceValue : String = ""
+        var balance = getUser()[0].Balance
+        withContext(Dispatchers.IO){
+            if(balance<= 250){
+                balanceValue = "Yatırım yapma"
+            }else if(balance <= 550){
+                balanceValue = "USD Al"
+            }else if(balance <= 1500){
+                balanceValue = "GOLD AL"
+            }else if(balance <= 10000){
+                balanceValue = "GOLD + EURO Al"
+            }else {
+                balanceValue = "Sepet Yap!"
+            }
+            return@withContext balanceValue
+        }
+        return balanceValue
     }
 
 }

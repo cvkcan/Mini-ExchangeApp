@@ -45,6 +45,6 @@ class MainActivity : AppCompatActivity() {
 
 
 //        applicationContext.deleteDatabase("ExchangeDb2")
-
+//
     }
 }
